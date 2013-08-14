@@ -1,11 +1,32 @@
-#include <msp430.h>
+/********************************************************************************
+ * This program uses a messy combo of Bill's I2C library and the TEMPO4k comm lib.
+ *
+ * When properly hooked up to a launchpad, it dumps serial values into the comm port over uart,
+ * which is nifty. This program is an example, but the chip can be used by transferring the
+ * AD7152.c,  AD7152.h, and pertinent comm library files.
+ *
+ * The exact hookup besides power and whatnot:
+ *
+ * MSP5342 pin 25 -> Launchpad p1.2
+ * MSP5342 pin 26 -> Launchpad p1.1
+ * MSP5342 pin 28 -> CDC pin 10
+ * MSP5342 pin 29 -> CDC pin 9
+ *
+ * make sure the jumpers are set for hardware uart and there's NO MSP in the launchpad
+ * socket, otherwise it won't work.
+ ******************************************************************************/
+#include "msp430f5342.h"
+#include "comm.h"
+#include "useful.h"
 #include "I2C.h"
 #include "AD7152.h"
-//#include "comm.h"
 
-unsigned char rxBuffer[32];
-int ID, generalCall;
-volatile char a;
+
+unsigned char RXData[16];
+usciConfig myCommPort = { UCA0_UART, UART_8N1, DEF_CTLW1, UBR_DIV(9600),
+		&RXData[0] };
+int myCommID, I2CID;
+int transmit = 1;
 extern char AD7152RxBuffer[16];
 
 void clockSetup(void) {
@@ -28,33 +49,56 @@ void clockSetup(void) {
 
 }
 
-void portInit(void) {
-	P1DIR = 0xFF;
-	P1OUT = 0xFF;
-	P4DIR = 0xFF;
-	P6DIR = 0xFB;
-	P6REN = 0x02;
+void timerASetup(void) {
 
+	TA0CTL = TASSEL_2 + ID_3 + MC_1;
+
+	TA0CCTL0 = CCIE;
+	TA0CCR0 = 15778; //mock clock calib: ideal value * .9861 scaling factor
+	//CCR0 = 16000 //ideal value
+}
+
+#pragma vector=TIMER0_A0_VECTOR
+__interrupt void TimerISR(void) {
+	_nop();
+
+	if (transmit) {
+		uartA0Write(&AD7152RxBuffer[1], 2, myCommID); //tx ch 1 registers
+
+	}
 }
 
 void main(void) {
 	WDTCTL = WDTPW + WDTHOLD; // Stop watchdog timer
-
 	clockSetup();
-	portInit();
+	timerASetup();
+	myCommID = registerComm(&myCommPort);
 
-	initializeB0I2C();
+	initializeI2C();
 
-	ID = registerCDC(CDC_CHEN1 | CDC_CHEN2 | CDC_SAMPLEC);
-	setCDC(ID);
+	I2CID = registerCDC(CDC_CHEN1 | CDC_SAMPLEC); //channel 1 continuous sampling
+	setCDC(I2CID);
 
 	_enable_interrupts();
+	resetCDC();
+	__delay_cycles(250000);
 
+	writeRegCDC(CDC_POS, CDC_DACPEN | 0x09); //setup the CAPDAC (vertical offset capacitance compensation)
+	writeRegCDC(CDC_SETUP1, CDC_SE_25pF); //set the full scale range
 	startCDC();
 
-	while (1) {
-	readCDC();
 
-		_nop();
+
+	while (1) {
+		if (getUCA0RxSize() > 0) {
+			uartA0Read(1, myCommID);
+			if (RXData[0] == 'q') {
+				transmit ^= 1;
+			}
+		}
+		readCDC();
+
 	}
 }
+
+

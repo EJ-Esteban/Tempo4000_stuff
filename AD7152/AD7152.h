@@ -17,6 +17,7 @@ int startCDC();
 int readCDC();
 int getCDCCommID();
 int setCDC(int ID);
+void resetCDC();
 
 
 //some
@@ -32,7 +33,7 @@ int setCDC(int ID);
 
 //special ops
 #define CDC_RESET		0xBF
-#define CDC_GC_RESET		0x06	//resets the device if it is the address immediately following a general call
+#define CDC_GC_RESET	0x06	//resets the device if it is the address immediately following a general call
 
 //register map
 #define CDC_STATUS	0x00
@@ -75,7 +76,7 @@ int setCDC(int ID);
 #define CDC_SE2pF		0x00									//2 pF differential mode
 #define CDC_SE_5pF		CDC_RANGE0								//.5pF differential mode
 #define CDC_SE_25pF		CDC_RANGE1								//.25pF differential mode
-#define CDC_SE4pf		CDC_RANGE1 + CDC_RANGE0					//4 pF differential mode
+#define CDC_SE4pF		CDC_RANGE1 + CDC_RANGE0					//4 pF differential mode
 
 //config register 0x0F
 //Default 0x00 (R/@)

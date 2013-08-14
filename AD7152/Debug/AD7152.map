@@ -1,7 +1,7 @@
 ******************************************************************************
                   MSP430 Linker PC v4.0.0                      
 ******************************************************************************
->> Linked Thu Aug 01 13:29:53 2013
+>> Linked Tue Aug 13 14:04:12 2013
 
 OUTPUT FILE NAME:   <AD7152.out>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00004494
@@ -19,7 +19,7 @@ MEMORY CONFIGURATION
   INFOB                 00001900   00000080  00000000  00000080  RWIX
   INFOA                 00001980   00000080  00000000  00000080  RWIX
   RAM                   00001c00   00002800  00000114  000026ec  RWIX
-  FLASH                 00004400   0000bb80  00000370  0000b810  RWIX
+  FLASH                 00004400   0000bb80  000003be  0000b7c2  RWIX
   INT00                 0000ff80   00000002  00000000  00000002  RWIX
   INT01                 0000ff82   00000002  00000000  00000002  RWIX
   INT02                 0000ff84   00000002  00000000  00000002  RWIX
@@ -116,27 +116,28 @@ section   page    origin      length       input sections
                   000044d0    00000006     I2C.obj (.cinit)
                   000044d6    00000002     --HOLE-- [fill = 0]
 
-.text      0    000044d8    00000298     
-                  000044d8    0000004c     AD7152.obj (.text:registerCDC)
-                  00004524    00000046     rts430x.lib : autoinit.obj (.text:_auto_init)
-                  0000456a    0000003e     I2C.obj (.text:changeI2CDevice)
-                  000045a8    00000034     I2C.obj (.text:initializeB0I2C)
-                  000045dc    00000032     I2C.obj (.text:UCB0I2CRead)
-                  0000460e    00000032     main.obj (.text:main)
-                  00004640    00000032     I2C.obj (.text:setupI2CDevice)
-                  00004672    00000030     main.obj (.text:clockSetup)
-                  000046a2    0000002c     AD7152.obj (.text:setCDC)
-                  000046ce    00000020     AD7152.obj (.text:writeRegCDC)
-                  000046ee    0000001a     AD7152.obj (.text:readRegCDC)
-                  00004708    00000018     main.obj (.text:portInit)
-                  00004720    00000012     rts430x.lib : memcpy.obj (.text:memcpy)
-                  00004732    00000010     I2C.obj (.text:UCB0I2CWrite)
-                  00004742    0000000e     AD7152.obj (.text:startCDC)
-                  00004750    0000000c     AD7152.obj (.text:readCDC)
-                  0000475c    0000000a     I2C.obj (.text:isBusy)
-                  00004766    00000004     rts430x.lib : pre_init.obj (.text:_system_pre_init)
-                  0000476a    00000004                 : exit.obj (.text:abort)
-                  0000476e    00000002                 : _lock.obj (.text:_nop)
+.text      0    000044d8    000002e6     
+                  000044d8    00000064     main.obj (.text:main)
+                  0000453c    0000004c     AD7152.obj (.text:registerCDC)
+                  00004588    00000046     rts430x.lib : autoinit.obj (.text:_auto_init)
+                  000045ce    0000003e     I2C.obj (.text:changeI2CDevice)
+                  0000460c    00000034     I2C.obj (.text:initializeB0I2C)
+                  00004640    00000032     I2C.obj (.text:UCB0I2CRead)
+                  00004672    00000032     I2C.obj (.text:setupI2CDevice)
+                  000046a4    00000030     main.obj (.text:clockSetup)
+                  000046d4    0000002c     AD7152.obj (.text:setCDC)
+                  00004700    00000020     AD7152.obj (.text:writeRegCDC)
+                  00004720    0000001c     AD7152.obj (.text:resetCDC)
+                  0000473c    0000001a     AD7152.obj (.text:readRegCDC)
+                  00004756    00000018     main.obj (.text:portInit)
+                  0000476e    00000012     rts430x.lib : memcpy.obj (.text:memcpy)
+                  00004780    00000010     I2C.obj (.text:UCB0I2CWrite)
+                  00004790    0000000e     AD7152.obj (.text:startCDC)
+                  0000479e    0000000c     AD7152.obj (.text:readCDC)
+                  000047aa    0000000a     I2C.obj (.text:isBusy)
+                  000047b4    00000004     rts430x.lib : pre_init.obj (.text:_system_pre_init)
+                  000047b8    00000004                 : exit.obj (.text:abort)
+                  000047bc    00000002                 : _lock.obj (.text:_nop)
 
 .int45     0    0000ffda    00000002     
                   0000ffda    00000002     I2C.obj (.int45)
@@ -234,7 +235,7 @@ ffffffff   .text
 00000732   ADC12MEM9
 00000733   ADC12MEM9_H
 00000732   ADC12MEM9_L
-0000476a   C$$EXIT
+000047b8   C$$EXIT
 000008c0   CBCTL0
 000008c1   CBCTL0_H
 000008c0   CBCTL0_L
@@ -690,11 +691,11 @@ ffffffff   .text
 000005f0   UCB0I2COA
 000005f1   UCB0I2COA_H
 000005f0   UCB0I2COA_L
-000045dc   UCB0I2CRead
+00004640   UCB0I2CRead
 000005f2   UCB0I2CSA
 000005f3   UCB0I2CSA_H
 000005f2   UCB0I2CSA_L
-00004732   UCB0I2CWrite
+00004780   UCB0I2CWrite
 000005fc   UCB0ICTL
 000005fd   UCB0ICTL_H
 000005fc   UCB0ICTL_L
@@ -765,45 +766,46 @@ ffffffff   __c_args__
 ffffffff   __etext__
 ffffffff   __pinit__
 ffffffff   __text__
-00004524   _auto_init
+00004588   _auto_init
 00004494   _c_int00
 00004494   _c_int00_noexit
 00001c6c   _cleanup_ptr
 00001c70   _dtors_ptr
 00001c64   _lock
-0000476e   _nop
+000047bc   _nop
 0000fffe   _reset_vector
 00004360   _stack
-00004766   _system_pre_init
+000047b4   _system_pre_init
 00001c68   _unlock
 00001c4a   a
-0000476a   abort
+000047b8   abort
 ffffffff   binit
 00001c4c   byteCountRX
 00001c4d   byteCountTX
-0000456a   changeI2CDevice
+000045ce   changeI2CDevice
 000044be   cinit
-00004672   clockSetup
+000046a4   clockSetup
 00001c22   currentCDCConfig
 00001c24   devCount
 00001c54   deviceArray
 00001c74   end
 ffffffff   etext
 00001c48   generalCall
-000045a8   initializeB0I2C
-0000475c   isBusy
-0000460e   main
-00004720   memcpy
+0000460c   initializeB0I2C
+000047aa   isBusy
+000044d8   main
+0000476e   memcpy
 ffffffff   pinit
-00004708   portInit
-00004750   readCDC
-000046ee   readRegCDC
-000044d8   registerCDC
+00004756   portInit
+0000479e   readCDC
+0000473c   readRegCDC
+0000453c   registerCDC
+00004720   resetCDC
 00001c26   rxBuffer
-000046a2   setCDC
-00004640   setupI2CDevice
-00004742   startCDC
-000046ce   writeRegCDC
+000046d4   setCDC
+00004672   setupI2CDevice
+00004790   startCDC
+00004700   writeRegCDC
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -1434,27 +1436,28 @@ address    name
 00004494   _c_int00_noexit
 000044be   __cinit__
 000044be   cinit
-000044d8   registerCDC
-00004524   _auto_init
-0000456a   changeI2CDevice
-000045a8   initializeB0I2C
-000045dc   UCB0I2CRead
-0000460e   main
-00004640   setupI2CDevice
-00004672   clockSetup
-000046a2   setCDC
-000046ce   writeRegCDC
-000046ee   readRegCDC
-00004708   portInit
-00004720   memcpy
-00004732   UCB0I2CWrite
-00004742   startCDC
-00004750   readCDC
-0000475c   isBusy
-00004766   _system_pre_init
-0000476a   C$$EXIT
-0000476a   abort
-0000476e   _nop
+000044d8   main
+0000453c   registerCDC
+00004588   _auto_init
+000045ce   changeI2CDevice
+0000460c   initializeB0I2C
+00004640   UCB0I2CRead
+00004672   setupI2CDevice
+000046a4   clockSetup
+000046d4   setCDC
+00004700   writeRegCDC
+00004720   resetCDC
+0000473c   readRegCDC
+00004756   portInit
+0000476e   memcpy
+00004780   UCB0I2CWrite
+00004790   startCDC
+0000479e   readCDC
+000047aa   isBusy
+000047b4   _system_pre_init
+000047b8   C$$EXIT
+000047b8   abort
+000047bc   _nop
 0000fffe   _reset_vector
 ffffffff   .text
 ffffffff   __binit__
@@ -1466,4 +1469,4 @@ ffffffff   binit
 ffffffff   etext
 ffffffff   pinit
 
-[655 symbols]
+[656 symbols]

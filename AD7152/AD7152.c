@@ -39,7 +39,7 @@ int writeRegCDC(char rAddr, int value) {
 	unsigned char cmd[2];
 	cmd[0] = rAddr;
 	cmd[1] = value;
-	UCB0I2CWrite(2, &cmd[0]);
+	I2CWrite(2, &cmd[0]);
 	while (isBusy())
 		;
 
@@ -48,7 +48,7 @@ int writeRegCDC(char rAddr, int value) {
 
 //returns only the first register, but fills a buffer of some length
 int readRegCDC(char rAddr, int length) {
-	UCB0I2CRead(length, &AD7152RxBuffer[0], rAddr);
+	I2CRead(length, &AD7152RxBuffer[0], rAddr);
 	while (isBusy())
 		;
 	return AD7152RxBuffer[0];
@@ -91,4 +91,11 @@ int setCDC(int ID) {
 	currentCDCConfig = CDCconfigs[ID];
 	changeI2CDevice(CDCCommID);
 	return 1;
+}
+
+void resetCDC(){
+	unsigned char cmd= CDC_RESET;
+	I2CWrite(1, &cmd);
+	while (isBusy())
+		;
 }
