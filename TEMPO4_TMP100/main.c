@@ -45,6 +45,7 @@ void main(void) {
 		_nop();
 		a = readLongTMP(TMP_TEMP);
 		_nop();
+
 	}
 #else
 	myTMP = registerTMP(TMP100_01, TMP_DEFAULT1); //register ADc with default codeword for 1 shot sampling
