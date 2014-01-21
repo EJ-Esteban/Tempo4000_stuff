@@ -1,0 +1,1 @@
+"./timing.obj" "./main.obj" "./comm.obj" "./TMP100.obj" -l"libc.a" "../lnk_msp430f5342.cmd" 
