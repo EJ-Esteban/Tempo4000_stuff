@@ -8,7 +8,7 @@ main.obj: ../tempo4hal.h
 main.obj: ../useful.h
 main.obj: ../clocks.h
 main.obj: ../timing.h
-main.obj: ../ADS1114new.h
+main.obj: ../ADS1114.h
 
 ../main.c: 
 C:/ti/ccsv5/ccs_base/msp430/include/msp430.h: 
@@ -18,4 +18,4 @@ C:/ti/ccsv5/ccs_base/msp430/include/in430.h:
 ../useful.h: 
 ../clocks.h: 
 ../timing.h: 
-../ADS1114new.h: 
+../ADS1114.h: 

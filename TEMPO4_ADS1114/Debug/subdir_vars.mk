@@ -7,43 +7,37 @@ CMD_SRCS += \
 ../lnk_msp430f5342.cmd 
 
 C_SRCS += \
-../MPU6000.c \
-../ads1114new.c \
+../ads1114.c \
 ../comm.c \
 ../main.c \
 ../timing.c 
 
 OBJS += \
-./MPU6000.obj \
-./ads1114new.obj \
+./ads1114.obj \
 ./comm.obj \
 ./main.obj \
 ./timing.obj 
 
 C_DEPS += \
-./MPU6000.pp \
-./ads1114new.pp \
+./ads1114.pp \
 ./comm.pp \
 ./main.pp \
 ./timing.pp 
 
 C_DEPS__QUOTED += \
-"MPU6000.pp" \
-"ads1114new.pp" \
+"ads1114.pp" \
 "comm.pp" \
 "main.pp" \
 "timing.pp" 
 
 OBJS__QUOTED += \
-"MPU6000.obj" \
-"ads1114new.obj" \
+"ads1114.obj" \
 "comm.obj" \
 "main.obj" \
 "timing.obj" 
 
 C_SRCS__QUOTED += \
-"../MPU6000.c" \
-"../ads1114new.c" \
+"../ads1114.c" \
 "../comm.c" \
 "../main.c" \
 "../timing.c" 

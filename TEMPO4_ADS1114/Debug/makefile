@@ -11,8 +11,7 @@ $(GEN_CMDS__FLAG) \
 "./timing.obj" \
 "./main.obj" \
 "./comm.obj" \
-"./ads1114new.obj" \
-"./MPU6000.obj" \
+"./ads1114.obj" \
 -l"libc.a" \
 "../lnk_msp430f5342.cmd" \
 
@@ -126,8 +125,8 @@ TEMPO4_ADS1114.out: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(MSP430_EXECUTABLE_OUTPUTS__QUOTED) "TEMPO4_ADS1114.out"
-	-$(RM) "MPU6000.pp" "ads1114new.pp" "comm.pp" "main.pp" "timing.pp" 
-	-$(RM) "MPU6000.obj" "ads1114new.obj" "comm.obj" "main.obj" "timing.obj" 
+	-$(RM) "ads1114.pp" "comm.pp" "main.pp" "timing.pp" 
+	-$(RM) "ads1114.obj" "comm.obj" "main.obj" "timing.obj" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

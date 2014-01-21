@@ -5,7 +5,7 @@
 #include "tempo4hal.h"
 #include "clocks.h"
 #include "timing.h"
-#include "ADS1114new.h"
+#include "ADS1114.h"
 
 int myADC;
 volatile int a;

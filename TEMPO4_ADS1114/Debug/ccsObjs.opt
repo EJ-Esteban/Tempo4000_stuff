@@ -1,1 +1,1 @@
-"./timing.obj" "./main.obj" "./comm.obj" "./ads1114new.obj" "./MPU6000.obj" -l"libc.a" "../lnk_msp430f5342.cmd" 
+"./timing.obj" "./main.obj" "./comm.obj" "./ads1114.obj" -l"libc.a" "../lnk_msp430f5342.cmd" 

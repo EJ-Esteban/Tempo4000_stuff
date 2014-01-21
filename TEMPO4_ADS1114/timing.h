@@ -33,4 +33,5 @@ typedef struct auxClockConfig			/// Enumerated type for ACLK configuration
 	unsigned char div;					///< ACLK divisor
 } aclkConf;
 
+clkInit(DCO_FREQ);
 #endif /* TIMING_H_ */

@@ -6,7 +6,7 @@
  */
 
 #include <msp430f5342.h>
-#include "ADS1114new.h"
+#include "ADS1114.h"
 #include "comm.h"
 //#include "final_testboard_hal.h"
 #include "tempo4hal.h"
